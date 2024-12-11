@@ -1,5 +1,5 @@
-import 'package:batch33/view/card_view.dart';
 // import 'package:batch33/view/snackbar_view.dart';
+import 'package:batch33/onboarding_page.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: CardView(),
+      home: OnboardingPage(),
     );
   }
 }

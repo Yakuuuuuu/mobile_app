@@ -6,6 +6,7 @@ class OnboardingPage extends StatefulWidget {
 
   @override
   State<OnboardingPage> createState() => _OnboardingPageState();
+  List<Widget> _OnboardingPages = [0];
 }
 
 class _OnboardingPageState extends State<OnboardingPage> {
@@ -19,7 +20,14 @@ class _OnboardingPageState extends State<OnboardingPage> {
           vertical: 50.0,
         ),
         child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Expanded(child: PageView(
+              controller: _pageController,
+              children: [],
+            ),),
             SmoothPageIndicator(
               controller: _pageController,
               count: 3,
