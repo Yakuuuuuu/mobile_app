@@ -13,7 +13,7 @@ class LoginPage extends StatelessWidget {
           'Login',
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            fontSize: 22,
+            fontSize: 26,
           ),
         ),
         backgroundColor: Colors.blue[800],
@@ -34,7 +34,7 @@ class LoginPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Icon(
-              Icons.hotel,
+              Icons.spa,
               size: 80,
               color: Colors.white,
             ),

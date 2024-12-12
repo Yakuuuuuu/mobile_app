@@ -25,57 +25,80 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 buildPage(
                   color: Colors.blueAccent,
                   title: 'Welcome',
-                  description: 'Welcome to hamrobooking!',
+                  description: 'Welcome to HamroBooking!',
                 ),
                 buildPage(
                   color: Colors.greenAccent,
                   title: 'View Hotel',
-                  description: 'View your stay.',
+                  description: 'Find the perfect stay for your journey.',
                 ),
                 buildPage(
                   color: Colors.purpleAccent,
                   title: 'Get Started',
-                  description: 'Sign up or log in to start.',
+                  description: 'Sign up or log in to begin your experience.',
                 ),
               ],
             ),
           ),
+          const SizedBox(height: 20),
           SmoothPageIndicator(
             controller: _pageController,
             count: 3,
             effect: const WormEffect(
               dotHeight: 12,
               dotWidth: 12,
-              activeDotColor: Colors.blue,
+              activeDotColor: Colors.deepPurpleAccent,
+              dotColor: Colors.grey,
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 30),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blueAccent,
+                    minimumSize: const Size(140, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
                   onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => const LoginPage()),
                     );
                   },
-                  child: const Text('Login'),
+                  child: const Text(
+                    'Login',
+                    style: TextStyle(fontSize: 16, color: Colors.white),
+                  ),
                 ),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.greenAccent,
+                    minimumSize: const Size(140, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
                   onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => const SignupPage()),
                     );
                   },
-                  child: const Text('Sign Up'),
+                  child: const Text(
+                    'Sign Up',
+                    style: TextStyle(fontSize: 16, color: Colors.white),
+                  ),
                 ),
               ],
             ),
           ),
+          const SizedBox(height: 30),
         ],
       ),
     );
@@ -97,12 +120,15 @@ class _OnboardingPageState extends State<OnboardingPage> {
               ),
             ),
             const SizedBox(height: 20),
-            Text(
-              description,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 18,
-                color: Colors.white,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: Text(
+                description,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                ),
               ),
             ),
           ],
