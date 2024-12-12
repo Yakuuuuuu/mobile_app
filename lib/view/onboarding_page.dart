@@ -25,17 +25,17 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 buildPage(
                   color: Colors.blueAccent,
                   title: 'Welcome',
-                  description: 'Discover amazing features in our app!',
+                  description: 'Welcome to hamrobooking!',
                 ),
                 buildPage(
                   color: Colors.greenAccent,
-                  title: 'Stay Connected',
-                  description: 'Connect with people around the globe.',
+                  title: 'View Hotel',
+                  description: 'View your stay.',
                 ),
                 buildPage(
                   color: Colors.purpleAccent,
                   title: 'Get Started',
-                  description: 'Sign up or log in to start your journey.',
+                  description: 'Sign up or log in to start.',
                 ),
               ],
             ),

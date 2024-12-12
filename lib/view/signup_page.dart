@@ -9,17 +9,17 @@ class SignupPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Sign Up')),
       body: Container(
-        color: Colors.tealAccent, // Background color for signup page
+        color: Colors.tealAccent, 
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Name TextField
+            
             TextField(
               decoration: const InputDecoration(
                 labelText: 'Name',
                 filled: true,
-                fillColor: Colors.white, // White background for input field
+                fillColor: Colors.white, 
                 border: OutlineInputBorder(),
               ),
             ),
@@ -29,7 +29,7 @@ class SignupPage extends StatelessWidget {
               decoration: const InputDecoration(
                 labelText: 'Email',
                 filled: true,
-                fillColor: Colors.white, // White background for input field
+                fillColor: Colors.white, 
                 border: OutlineInputBorder(),
               ),
             ),
@@ -39,25 +39,25 @@ class SignupPage extends StatelessWidget {
               decoration: const InputDecoration(
                 labelText: 'Password',
                 filled: true,
-                fillColor: Colors.white, // White background for input field
+                fillColor: Colors.white, 
                 border: OutlineInputBorder(),
               ),
               obscureText: true,
             ),
             const SizedBox(height: 20),
-            // Sign Up Button
+
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.deepOrangeAccent, // Button color
-                minimumSize: const Size(double.infinity, 50), // Full width button
+                backgroundColor: Colors.deepOrangeAccent, 
+                minimumSize: const Size(double.infinity, 50), 
               ),
               onPressed: () {
-                Navigator.pop(context); // Return to the previous page
+                Navigator.pop(context); 
               },
               child: const Text('Sign Up'),
             ),
             const SizedBox(height: 20),
-            // Already have an account? (Login link)
+
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -71,7 +71,7 @@ class SignupPage extends StatelessWidget {
                   },
                   child: const Text(
                     'Login',
-                    style: TextStyle(color: Colors.deepOrangeAccent), // Login text color
+                    style: TextStyle(color: Colors.deepOrangeAccent), 
                   ),
                 ),
               ],

@@ -10,40 +10,40 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login'),
-        backgroundColor: Colors.deepOrangeAccent, // AppBar color
+        backgroundColor: Colors.amber,
       ),
       body: Container(
-        color: Colors.lightBlueAccent, // Background color
+        color: Colors.lightBlueAccent, 
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Email TextField
+            
             TextField(
               decoration: const InputDecoration(
                 labelText: 'Email',
                 filled: true,
-                fillColor: Colors.white, // White background for input field
+                fillColor: Colors.white, 
                 border: OutlineInputBorder(),
               ),
             ),
             const SizedBox(height: 10),
-            // Password TextField
+            
             TextField(
               decoration: const InputDecoration(
                 labelText: 'Password',
                 filled: true,
-                fillColor: Colors.white, // White background for input field
+                fillColor: Colors.white, 
                 border: OutlineInputBorder(),
               ),
               obscureText: true,
             ),
             const SizedBox(height: 20),
-            // Login Button
+            
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.deepOrangeAccent, // Button color
-                minimumSize: const Size(double.infinity, 50), // Full width button
+                backgroundColor: Colors.red, 
+                minimumSize: const Size(double.infinity, 50), 
               ),
               onPressed: () {
                 Navigator.pushAndRemoveUntil(
@@ -55,7 +55,7 @@ class LoginPage extends StatelessWidget {
               child: const Text('Login'),
             ),
             const SizedBox(height: 20),
-            // Sign Up Option
+
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -69,7 +69,7 @@ class LoginPage extends StatelessWidget {
                   },
                   child: const Text(
                     'Sign Up',
-                    style: TextStyle(color: Colors.deepOrangeAccent), // Sign Up text color
+                    style: TextStyle(color: Colors.deepOrangeAccent), 
                   ),
                 ),
               ],
