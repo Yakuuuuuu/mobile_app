@@ -9,7 +9,7 @@ class DashboardPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           'Dashboard',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22, color: Colors.white,),
         ),
         backgroundColor: Colors.teal,
         centerTitle: true,
@@ -18,18 +18,16 @@ class DashboardPage extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.search),
             onPressed: () {
-              // Search functionality placeholder
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Search functionality coming soon...')),
+                const SnackBar(content: Text('coming soon...')),
               );
             },
           ),
           IconButton(
             icon: const Icon(Icons.account_circle),
             onPressed: () {
-              // Profile functionality placeholder
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Profile functionality coming soon...')),
+                const SnackBar(content: Text('coming soon...')),
               );
             },
           ),
@@ -56,7 +54,7 @@ class DashboardPage extends StatelessWidget {
             children: [
               const SizedBox(height: 50),
               const Text(
-                'Welcome to your Dashboard!',
+                'Lets book a room!',
                 style: TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
