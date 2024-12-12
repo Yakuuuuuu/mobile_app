@@ -23,17 +23,17 @@ class _OnboardingPageState extends State<OnboardingPage> {
               controller: _pageController,
               children: [
                 buildPage(
-                  color: Colors.red,
+                  color: Colors.blueAccent,
                   title: 'Welcome',
                   description: 'Discover amazing features in our app!',
                 ),
                 buildPage(
-                  color: Colors.amber,
+                  color: Colors.greenAccent,
                   title: 'Stay Connected',
-                  description: 'Connect with people around the world.',
+                  description: 'Connect with people around the globe.',
                 ),
                 buildPage(
-                  color: Colors.blue,
+                  color: Colors.purpleAccent,
                   title: 'Get Started',
                   description: 'Sign up or log in to start your journey.',
                 ),
@@ -57,7 +57,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    // Navigate to Login Page
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => const LoginPage()),
@@ -67,7 +66,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    // Navigate to Sign Up Page
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => const SignupPage()),
