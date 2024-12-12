@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'signup_page.dart';
 import 'login_page.dart';
 
 class OnboardingPage extends StatefulWidget {
@@ -27,7 +28,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   description: 'Discover amazing features in our app!',
                 ),
                 buildPage(
-                  color: Colors.green,
+                  color: Colors.amber,
                   title: 'Stay Connected',
                   description: 'Connect with people around the globe.',
                 ),
@@ -51,14 +52,30 @@ class _OnboardingPageState extends State<OnboardingPage> {
           const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginPage()),
-                );
-              },
-              child: const Text('Get Started'),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    // Navigate to Login Page
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const LoginPage()),
+                    );
+                  },
+                  child: const Text('Login'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    // Navigate to Sign Up Page
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const SignupPage()),
+                    );
+                  },
+                  child: const Text('Sign Up'),
+                ),
+              ],
             ),
           ),
         ],
