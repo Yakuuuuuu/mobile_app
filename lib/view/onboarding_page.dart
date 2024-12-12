@@ -30,7 +30,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 buildPage(
                   color: Colors.amber,
                   title: 'Stay Connected',
-                  description: 'Connect with people around the globe.',
+                  description: 'Connect with people around the world.',
                 ),
                 buildPage(
                   color: Colors.blue,
