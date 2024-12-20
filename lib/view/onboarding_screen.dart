@@ -31,7 +31,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         children: [
           PageView(
             controller: _pageController,
-            children: [
+            children: const [
               OnboardingSlide(
                 title: 'Welcome to Hamro Booking',
                 description: 'Manage your bookings easily with our app!',
@@ -66,7 +66,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                LoginScreen()), // Skip to Login screen
+                                const LoginScreen()), // Skip to Login screen
                       );
                     },
                     child: const Text(
@@ -94,7 +94,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  LoginScreen()), // Navigate to Login screen
+                                  const LoginScreen()), // Navigate to Login screen
                         );
                       } else {
                         _pageController.nextPage(

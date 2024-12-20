@@ -1,5 +1,5 @@
-import 'package:bus_ticket/view/onboarding_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_app/view/onboarding_screen.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -10,9 +10,9 @@ class App extends StatelessWidget {
       title: 'Hamro Booking',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme(
-          primary: const Color.fromARGB(255, 240, 240, 240),
-          secondary: const Color(0xFFFF5722),
+        colorScheme: const ColorScheme(
+          primary: Color(0xFF0000FF),
+          secondary: Color(0xFFFF5722),
           surface: Colors.white,
           error: Colors.red,
           onPrimary: Colors.white,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+class FavoriteScreen extends StatelessWidget {
+  const FavoriteScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +24,9 @@ class ProfileScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.developer_mode,
+                  Icons.favorite_border,
                   size: 100,
-                  color: Colors.orange,
+                  color: Colors.red,
                 ),
                 SizedBox(height: 20),
                 Text(
@@ -38,7 +38,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 Text(
-                  'Hi my name is Samrat',
+                  'Favorites',
                   style: TextStyle(fontSize: 24),
                 ),
               ],

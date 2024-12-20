@@ -1,9 +1,7 @@
-// dashboard_screen.dart
-
 import 'package:flutter/material.dart';
 
 import 'bookings_screen.dart';
-import 'profile_screen.dart'; // Import ProfileScreen
+import 'profile_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -16,11 +14,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
-    Center(
-        child: Text('This is Sprint 2',
+    const Center(
+        child: Text('This is Sprint 3',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700))),
-    BookingsScreen(),
-    ProfileScreen(), // ProfileScreen displays saved hotels
+    const BookingsScreen(),
+    const ProfileScreen(),
   ];
 
   void _onTabTapped(int index) {
@@ -81,13 +79,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ),
       body: Stack(
         children: [
-          Opacity(
-            opacity: 0.2,
-            child: Container(
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/images/background.png'),
-                  fit: BoxFit.cover,
+          Positioned.fill(
+            child: Opacity(
+              opacity: 0.2,
+              child: Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/background.png'),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
@@ -109,7 +109,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'Profile', // Navigate to ProfileScreen
+            label: 'Profile',
           ),
         ],
       ),

@@ -114,10 +114,10 @@ class _SignupScreenState extends State<SignupScreen> {
             const SizedBox(height: 16),
             TextField(
               controller: _dobController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Date of Birth',
                 prefixIcon: Icon(Icons.calendar_today),
-                border: const OutlineInputBorder(),
+                border: OutlineInputBorder(),
               ),
               readOnly: true,
               onTap: () => _selectDate(context),
@@ -178,7 +178,8 @@ class _SignupScreenState extends State<SignupScreen> {
                     _selectedCity != null) {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => LoginScreen()),
+                    MaterialPageRoute(
+                        builder: (context) => const LoginScreen()),
                   );
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -206,7 +207,8 @@ class _SignupScreenState extends State<SignupScreen> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => LoginScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => const LoginScreen()),
                     );
                   },
                   child: const Text('Login',

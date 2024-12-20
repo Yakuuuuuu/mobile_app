@@ -6,10 +6,6 @@ class BookingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
-        title: Text('My Bookings'),
-      ),
       body: Stack(
         children: [
           Opacity(
@@ -23,7 +19,7 @@ class BookingsScreen extends StatelessWidget {
               ),
             ),
           ),
-          Center(
+          const Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -32,17 +28,17 @@ class BookingsScreen extends StatelessWidget {
                   size: 100,
                   color: Colors.orange,
                 ),
-                const SizedBox(height: 20),
-                const Text(
+                SizedBox(height: 20),
+                Text(
                   'In Development Phase',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 20),
-                const Text(
-                  'Bookings Screen',
+                SizedBox(height: 20),
+                Text(
+                  'Booking',
                   style: TextStyle(fontSize: 24),
                 ),
               ],
