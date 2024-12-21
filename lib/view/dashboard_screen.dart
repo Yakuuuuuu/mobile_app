@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'bookings_screen.dart';
+import 'bookings_screen.dart'; // Import your BookingsScreen
+import 'profile_screen.dart'; // Import your ProfileScreen
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -12,6 +13,7 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   int _currentIndex = 0;
 
+  // Replace placeholder widgets with the actual screens
   final List<Widget> _pages = [
     const Center(
       child: Text(
@@ -26,12 +28,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
       ),
     ),
-    const Center(
-      child: Text(
-        'Profile Screen is under development.',
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-      ),
-    ),
+    const ProfileScreen(), // Replace with your ProfileScreen
   ];
 
   void _onTabTapped(int index) {

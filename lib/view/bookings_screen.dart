@@ -42,12 +42,6 @@ class _BookingsScreenState extends State<BookingsScreen>
           ),
         ),
         centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.close, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.help_outline, color: Colors.white),
