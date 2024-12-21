@@ -20,24 +20,10 @@ class _SignupScreenState extends State<SignupScreen> {
 
   DateTime? _selectedDate;
   String? _selectedCountry;
-  String? _selectedCity;
 
   final List<String> _countries = ['Nepal', 'India', 'USA', 'UK'];
-  final Map<String, List<String>> _cities = {
-    'Nepal': ['Kathmandu', 'Pokhara', 'Lalitpur'],
-    'India': ['Delhi', 'Mumbai', 'Bengaluru'],
-    'USA': ['New York', 'Los Angeles', 'Chicago'],
-    'UK': ['London', 'Manchester', 'Birmingham'],
-  };
-
-  List<String> _currentCities = [];
 
   @override
-  void initState() {
-    super.initState();
-    _currentCities = _cities['Nepal']!;
-  }
-
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -45,7 +31,7 @@ class _SignupScreenState extends State<SignupScreen> {
       firstDate: DateTime(1900),
       lastDate: DateTime.now(),
     );
-    if (picked != null && picked != _selectedDate) {
+    if (picked != null) {
       setState(() {
         _selectedDate = picked;
         _dobController.text = "${_selectedDate!.toLocal()}".split(' ')[0];
@@ -57,152 +43,130 @@ class _SignupScreenState extends State<SignupScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sign Up', style: TextStyle(color: Colors.white)),
-        backgroundColor: Theme.of(context).primaryColor,
+        title: const Text('Create Account'),
+        backgroundColor: Colors.blue[800],
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
-        child: ListView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            TextField(
-              controller: _emailController,
-              decoration: const InputDecoration(
-                labelText: 'Email',
-                prefixIcon: Icon(Icons.email),
-                border: OutlineInputBorder(),
-              ),
-              keyboardType: TextInputType.emailAddress,
-              style: const TextStyle(
-                  fontFamily: 'Roboto', fontWeight: FontWeight.w400),
+            const SizedBox(height: 16),
+            Text(
+              "Welcome! Let's get started",
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue[800],
+                  ),
+              textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16),
-            TextField(
-              controller: _passwordController,
-              decoration: const InputDecoration(
-                labelText: 'Password',
-                prefixIcon: Icon(Icons.lock),
-                border: OutlineInputBorder(),
+            Card(
+              elevation: 6,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
               ),
-              obscureText: true,
-              style: const TextStyle(
-                  fontFamily: 'Roboto', fontWeight: FontWeight.w400),
-            ),
-            const SizedBox(height: 16),
-            TextField(
-              controller: _confirmPasswordController,
-              decoration: const InputDecoration(
-                labelText: 'Confirm Password',
-                prefixIcon: Icon(Icons.lock),
-                border: OutlineInputBorder(),
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  children: [
+                    _buildTextField(
+                      controller: _emailController,
+                      label: 'Email',
+                      icon: Icons.email,
+                      keyboardType: TextInputType.emailAddress,
+                    ),
+                    const SizedBox(height: 16),
+                    _buildTextField(
+                      controller: _passwordController,
+                      label: 'Password',
+                      icon: Icons.lock,
+                      obscureText: true,
+                    ),
+                    const SizedBox(height: 16),
+                    _buildTextField(
+                      controller: _confirmPasswordController,
+                      label: 'Confirm Password',
+                      icon: Icons.lock,
+                      obscureText: true,
+                    ),
+                    const SizedBox(height: 16),
+                    _buildTextField(
+                      controller: _contactNumberController,
+                      label: 'Contact Number',
+                      icon: Icons.phone,
+                      keyboardType: TextInputType.phone,
+                    ),
+                    const SizedBox(height: 16),
+                    GestureDetector(
+                      onTap: () => _selectDate(context),
+                      child: AbsorbPointer(
+                        child: _buildTextField(
+                          controller: _dobController,
+                          label: 'Date of Birth',
+                          icon: Icons.calendar_today,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    DropdownButtonFormField<String>(
+                      value: _selectedCountry,
+                      decoration: _buildInputDecoration('Country', Icons.flag),
+                      items: _countries.map((String country) {
+                        return DropdownMenuItem<String>(
+                          value: country,
+                          child: Text(country),
+                        );
+                      }).toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedCountry = value;
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 24),
+                    ElevatedButton(
+                      onPressed: () {
+                        if (_emailController.text.isNotEmpty &&
+                            _passwordController.text.isNotEmpty &&
+                            _confirmPasswordController.text.isNotEmpty &&
+                            _contactNumberController.text.isNotEmpty &&
+                            _dobController.text.isNotEmpty &&
+                            _selectedCountry != null) {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const LoginScreen()),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Please fill all fields')),
+                          );
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        backgroundColor: Colors.blue[800],
+                      ),
+                      child: const Text(
+                        'Sign Up',
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                  ],
+                ),
               ),
-              obscureText: true,
-              style: const TextStyle(
-                  fontFamily: 'Roboto', fontWeight: FontWeight.w400),
-            ),
-            const SizedBox(height: 16),
-            TextField(
-              controller: _contactNumberController,
-              decoration: const InputDecoration(
-                labelText: 'Contact Number',
-                prefixIcon: Icon(Icons.phone),
-                border: OutlineInputBorder(),
-              ),
-              keyboardType: TextInputType.phone,
-              style: const TextStyle(
-                  fontFamily: 'Roboto', fontWeight: FontWeight.w400),
-            ),
-            const SizedBox(height: 16),
-            TextField(
-              controller: _dobController,
-              decoration: const InputDecoration(
-                labelText: 'Date of Birth',
-                prefixIcon: Icon(Icons.calendar_today),
-                border: OutlineInputBorder(),
-              ),
-              readOnly: true,
-              onTap: () => _selectDate(context),
-              style: const TextStyle(
-                  fontFamily: 'Roboto', fontWeight: FontWeight.w400),
-            ),
-            const SizedBox(height: 16),
-            DropdownButtonFormField<String>(
-              value: _selectedCountry,
-              decoration: const InputDecoration(
-                labelText: 'Country',
-                prefixIcon: Icon(Icons.flag),
-                border: OutlineInputBorder(),
-              ),
-              items: _countries.map((String country) {
-                return DropdownMenuItem<String>(
-                  value: country,
-                  child: Text(country),
-                );
-              }).toList(),
-              onChanged: (value) {
-                setState(() {
-                  _selectedCountry = value;
-                  _currentCities = _cities[_selectedCountry!]!;
-                  _selectedCity = null;
-                });
-              },
-            ),
-            const SizedBox(height: 16),
-            DropdownButtonFormField<String>(
-              value: _selectedCity,
-              decoration: const InputDecoration(
-                labelText: 'City',
-                prefixIcon: Icon(Icons.location_city),
-                border: OutlineInputBorder(),
-              ),
-              items: _currentCities.map((String city) {
-                return DropdownMenuItem<String>(
-                  value: city,
-                  child: Text(city),
-                );
-              }).toList(),
-              onChanged: (value) {
-                setState(() {
-                  _selectedCity = value;
-                });
-              },
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {
-                if (_emailController.text.isNotEmpty &&
-                    _passwordController.text.isNotEmpty &&
-                    _confirmPasswordController.text.isNotEmpty &&
-                    _contactNumberController.text.isNotEmpty &&
-                    _dobController.text.isNotEmpty &&
-                    _selectedCountry != null &&
-                    _selectedCity != null) {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const LoginScreen()),
-                  );
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Please fill all fields')),
-                  );
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 14),
-                textStyle: const TextStyle(
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 18),
-              ),
-              child: const Text('Sign Up'),
             ),
             const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("Already have an account?",
-                    style: TextStyle(
-                        fontFamily: 'Roboto', fontWeight: FontWeight.w400)),
+                const Text("Already have an account?"),
                 TextButton(
                   onPressed: () {
                     Navigator.push(
@@ -211,15 +175,37 @@ class _SignupScreenState extends State<SignupScreen> {
                           builder: (context) => const LoginScreen()),
                     );
                   },
-                  child: const Text('Login',
-                      style: TextStyle(
-                          fontFamily: 'Roboto', fontWeight: FontWeight.w500)),
+                  child:
+                      const Text('Login', style: TextStyle(color: Colors.blue)),
                 ),
               ],
             ),
           ],
         ),
       ),
+    );
+  }
+
+  InputDecoration _buildInputDecoration(String label, IconData icon) {
+    return InputDecoration(
+      labelText: label,
+      prefixIcon: Icon(icon),
+      border: const OutlineInputBorder(),
+    );
+  }
+
+  TextField _buildTextField({
+    required TextEditingController controller,
+    required String label,
+    required IconData icon,
+    TextInputType? keyboardType,
+    bool obscureText = false,
+  }) {
+    return TextField(
+      controller: controller,
+      decoration: _buildInputDecoration(label, icon),
+      keyboardType: keyboardType,
+      obscureText: obscureText,
     );
   }
 }

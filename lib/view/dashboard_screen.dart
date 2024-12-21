@@ -15,8 +15,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   final List<Widget> _pages = [
     const Center(
-        child: Text('This is Sprint 3',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700))),
+      child: Text(
+        'This is Sprint 3',
+        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      ),
+    ),
     const BookingsScreen(),
     const ProfileScreen(),
   ];
@@ -32,7 +35,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: const Text('This function is still under work'),
+        content: const Text('This feature is still under development.'),
         action: SnackBarAction(
           label: 'Dismiss',
           onPressed: () {
@@ -57,15 +60,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
               style: Theme.of(context)
                   .textTheme
                   .titleLarge
-                  ?.copyWith(color: Colors.white),
+                  ?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(width: 10),
-            const Text(
-              '🙏',
-              style: TextStyle(fontSize: 24),
-            ),
+            const SizedBox(width: 8),
+            const Text('🙏', style: TextStyle(fontSize: 24)),
           ],
         ),
+        centerTitle: true,
         actions: [
           IconButton(
             icon: const Icon(Icons.notifications, color: Colors.white),
@@ -79,6 +80,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ),
       body: Stack(
         children: [
+          // Background with reduced opacity
           Positioned.fill(
             child: Opacity(
               opacity: 0.2,
@@ -92,12 +94,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
             ),
           ),
+          // Main Page Content
           _pages[_currentIndex],
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: _onTabTapped,
+        backgroundColor: Colors.white,
+        selectedItemColor: Theme.of(context).primaryColor,
+        unselectedItemColor: Colors.grey,
+        showUnselectedLabels: true,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.explore),
