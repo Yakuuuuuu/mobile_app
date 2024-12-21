@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'booking_details_screen.dart'; // Import Booking Details Screen
+import 'help_center_screen.dart'; // Import Help Center Screen
+
 class BookingsScreen extends StatefulWidget {
   const BookingsScreen({super.key});
 
@@ -32,54 +35,90 @@ class _BookingsScreenState extends State<BookingsScreen>
         elevation: 0,
         title: const Text(
           'Trips',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+          ),
         ),
         centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.close, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.help_outline, color: Colors.white),
             onPressed: () {
-              // Add help action
+              // Navigate to the Help Center Screen
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const HelpCenterScreen(),
+                ),
+              );
             },
           ),
           IconButton(
             icon:
                 const Icon(Icons.cloud_download_outlined, color: Colors.white),
             onPressed: () {
-              // Add download action
+              // Navigate to BookingDetailsScreen
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const BookingDetailsScreen(),
+                ),
+              );
             },
           ),
         ],
-        bottom: TabBar(
-          controller: _tabController,
-          indicatorColor: Colors.blue,
-          labelColor: Colors.blue,
-          unselectedLabelColor: Colors.white,
-          tabs: const [
-            Tab(text: 'Active'),
-            Tab(text: 'Past'),
-            Tab(text: 'Canceled'),
-          ],
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(50.0),
+          child: Align(
+            alignment: Alignment.centerLeft, // Align TabBar to the left
+            child: TabBar(
+              controller: _tabController,
+              isScrollable: true, // Allow tabs to scroll
+              indicator: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: Colors.blue,
+                    width: 2.0,
+                  ),
+                ),
+              ),
+              labelColor: Colors.blue,
+              unselectedLabelColor: Colors.white,
+              labelStyle: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+              tabs: const [
+                Tab(text: 'Active'),
+                Tab(text: 'Past'),
+                Tab(text: 'Canceled'),
+              ],
+            ),
+          ),
         ),
       ),
       body: TabBarView(
         controller: _tabController,
         children: [
           _buildTabContent(
-            imagePath:
-                'assets/images/active_tab_image.png', // Replace with actual path
+            imagePath: 'assets/images/active_image.png',
             title: 'No bookings yet',
             subtitle: 'Sign in or create an account to get started.',
           ),
           _buildTabContent(
-            imagePath:
-                'assets/images/past_tab_image.png', // Replace with actual path
+            imagePath: 'assets/images/past_image.png',
             title: 'No past bookings',
             subtitle: 'Sign in or create an account to get started.',
           ),
           _buildTabContent(
-            imagePath:
-                'assets/images/canceled_tab_image.png', // Replace with actual path
+            imagePath: 'assets/images/canceled_image.png',
             title: 'No canceled bookings',
             subtitle: 'Sign in or create an account to get started.',
           ),
