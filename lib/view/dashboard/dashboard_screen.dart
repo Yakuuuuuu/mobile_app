@@ -22,13 +22,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
     const BookingsScreen(),
     const Center(
       child: Text(
-        'Profile Screen is under development.',
+        'Favorites',
         style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
       ),
     ),
     const Center(
       child: Text(
-        'Favorites',
+        'Profile Screen is under development.',
         style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
       ),
     ),
@@ -61,32 +61,34 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
-        elevation: 4.0,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Hamro Booking',
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+      appBar: _currentIndex == 0
+          ? AppBar(
+              backgroundColor: Theme.of(context).primaryColor,
+              elevation: 4.0,
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Hamro Booking',
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
-            ),
-            const SizedBox(width: 8),
-            const Text('🙏', style: TextStyle(fontSize: 24)),
-          ],
-        ),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications, color: Colors.white),
-            onPressed: () => _showSnackBar(
-                context, 'This feature is still under development.'),
-          ),
-        ],
-      ),
+                  const SizedBox(width: 8),
+                  const Text('🙏', style: TextStyle(fontSize: 24)),
+                ],
+              ),
+              centerTitle: true,
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.notifications, color: Colors.white),
+                  onPressed: () => _showSnackBar(
+                      context, 'This feature is still under development.'),
+                ),
+              ],
+            )
+          : null,
       body: Stack(
         children: [
           Positioned.fill(
@@ -126,12 +128,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
             label: 'Bookings',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.favorite),
             label: 'Favorites',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
           ),
         ],
       ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'dashboard_screen.dart';
+import 'dashboard/dashboard_screen.dart';
 import 'signup_screen.dart';
 
 class LoginScreen extends StatelessWidget {

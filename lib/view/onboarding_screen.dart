@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'login_screen.dart';
+import 'dashboard/dashboard_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -66,7 +66,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                const LoginScreen()), // Skip to Login screen
+                                const DashboardScreen()), // Skip to Dashboard
                       );
                     },
                     child: const Text(
@@ -94,7 +94,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  const LoginScreen()), // Navigate to Login screen
+                                  const DashboardScreen()), // Navigate to Dashboard
                         );
                       } else {
                         _pageController.nextPage(
