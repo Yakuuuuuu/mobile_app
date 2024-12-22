@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'dashboard_screen.dart';
 import 'signup_screen.dart';
+import 'terms_and_condition_screen.dart'; // Import Terms and Conditions Screen
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -174,7 +175,13 @@ class LoginScreen extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        _showComingSoonDialog(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const TermsAndConditionScreen(),
+                          ),
+                        );
                       },
                       child: Text(
                         "Terms & Conditions",

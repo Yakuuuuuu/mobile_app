@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'booking_details_screen.dart'; // Import Booking Details Screen
 import 'help_center_screen.dart'; // Import Help Center Screen
+import 'login_screen.dart'; // Import Login Screen
 
 class BookingsScreen extends StatefulWidget {
   const BookingsScreen({super.key});
@@ -153,7 +154,13 @@ class _BookingsScreenState extends State<BookingsScreen>
           const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {
-              // Navigate to Sign In screen
+              // Navigate to Login Screen
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const LoginScreen(),
+                ),
+              );
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blue,
