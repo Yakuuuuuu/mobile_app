@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'bookings_screen.dart';
 import 'login_screen.dart';
-import 'notification_screen.dart'; // Import Notification Screen
+import 'notification_screen.dart';
+import 'profile_screen.dart'; // Import Profile Screen
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -16,7 +17,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   // Pages for the bottom navigation
   final List<Widget> _pages = [
-    const SearchScreen(), // Updated to include the Search screen
+    const SearchScreen(),
     const BookingsScreen(),
     const Center(
       child: Text(
@@ -24,12 +25,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
       ),
     ),
-    const Center(
-      child: Text(
-        'Profile Screen',
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-      ),
-    ),
+    const ProfileScreen(), // Navigate to ProfileScreen
   ];
 
   // Method to handle tab changes
