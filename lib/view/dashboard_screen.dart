@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'bookings_screen.dart';
 import 'login_screen.dart';
+import 'notification_screen.dart'; // Import Notification Screen
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -15,7 +16,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   // Pages for the bottom navigation
   final List<Widget> _pages = [
-    const SearchScreen(), // Search screen replaces the Explore page
+    const SearchScreen(), // Updated to include the Search screen
     const BookingsScreen(),
     const Center(
       child: Text(
@@ -95,7 +96,13 @@ class SearchScreen extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.notifications, color: Colors.white),
             onPressed: () {
-              // Notification click handler
+              // Navigate to Notification Screen
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const NotificationScreen(),
+                ),
+              );
             },
           ),
         ],

@@ -36,8 +36,8 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                   setState(() {
                     favoriteLists.add(newListName);
                   });
+                  Navigator.pop(context);
                 }
-                Navigator.pop(context);
               },
               child: const Text("Create"),
             ),
@@ -66,18 +66,23 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
             padding: const EdgeInsets.all(16.0),
             color: Colors.grey[200],
             child: Row(
-              children: const [
-                Icon(Icons.favorite_border, color: Colors.blue),
-                SizedBox(width: 8),
+              children: [
+                const Icon(Icons.favorite_border, color: Colors.blue),
+                const SizedBox(width: 8),
                 Expanded(
-                  child: Text(
+                  child: const Text(
                     "Keep track of stays you like",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
-                Text(
-                  "Log in or create an account",
-                  style: TextStyle(color: Colors.blue),
+                GestureDetector(
+                  onTap: () {
+                    // Add navigation to login or create account
+                  },
+                  child: const Text(
+                    "Log in or create an account",
+                    style: TextStyle(color: Colors.blue),
+                  ),
                 ),
               ],
             ),
@@ -106,7 +111,10 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                     itemCount: favoriteLists.length,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        title: Text(favoriteLists[index]),
+                        title: Text(
+                          favoriteLists[index],
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
                         leading: const Icon(Icons.folder, color: Colors.blue),
                         trailing: IconButton(
                           icon: const Icon(Icons.delete, color: Colors.red),
@@ -117,7 +125,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                           },
                         ),
                         onTap: () {
-                          // Open the list
+                          // Open the list or perform another action
                         },
                       );
                     },
