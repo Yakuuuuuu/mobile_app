@@ -1,184 +1,139 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile_app/bloc/onboarding_state.dart';
 
+import '../bloc/onboarding_bloc.dart';
+import '../bloc/onboarding_event.dart';
 import 'dashboard_screen.dart';
+import 'widgets/dot_indicator.dart';
 
-class OnboardingScreen extends StatefulWidget {
+class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
 
   @override
-  _OnboardingScreenState createState() => _OnboardingScreenState();
-}
-
-class _OnboardingScreenState extends State<OnboardingScreen> {
-  final PageController _pageController = PageController();
-  int _currentPage = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    _pageController.addListener(() {
-      setState(() {
-        _currentPage = _pageController.page!.toInt();
-      });
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.blueAccent,
-      body: Stack(
-        children: [
-          PageView(
-            controller: _pageController,
-            children: const [
-              OnboardingSlide(
-                title: 'Welcome to Hamro Booking',
-                description: 'Manage your bookings easily with our app!',
-              ),
-              OnboardingSlide(
-                title: 'Explore Available Slots',
-                description: 'Find available slots with just a few taps.',
-              ),
-              OnboardingSlide(
-                title: 'Secure and Fast Payments',
-                description:
-                    'Enjoy fast and secure payments for your bookings.',
-              ),
-              OnboardingSlide(
-                title: 'Get Started Today!',
-                description: 'Start managing your bookings now!',
-              ),
-            ],
-          ),
-          Positioned(
-            bottom: 30,
-            left: 0,
-            right: 0,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                const DashboardScreen()), // Skip to Dashboard
-                      );
-                    },
-                    child: const Text(
-                      'Skip',
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                        color: Colors.white,
+    final pageController = PageController();
+
+    final List<Map<String, dynamic>> slides = [
+      {
+        'color': const Color.fromARGB(255, 230, 230, 158),
+        'quote': "Welcome to Hamro Booking, your travel companion!",
+        'icon': Icons.hotel,
+      },
+      {
+        'color': Colors.blue,
+        'quote': "Find the best hotels at the best prices.",
+        'icon': Icons.attach_money,
+      },
+      {
+        'color': Colors.green,
+        'quote': "Your dream destination is just a click away.",
+        'icon': Icons.flight_takeoff,
+      },
+      {
+        'color': Colors.orange,
+        'quote': "Experience comfort like never before.",
+        'icon': Icons.king_bed,
+      },
+    ];
+
+    return BlocProvider(
+      create: (_) => OnboardingBloc(pageController),
+      child: BlocBuilder<OnboardingBloc, OnboardingState>(
+        builder: (context, state) {
+          final bloc = context.read<OnboardingBloc>();
+          int currentIndex =
+              state is OnboardingSlideChangedState ? state.currentIndex : 0;
+
+          return Scaffold(
+            body: Stack(
+              children: [
+                PageView.builder(
+                  controller: pageController,
+                  onPageChanged: (index) {
+                    bloc.add(UpdateSlideIndexEvent(index));
+                  },
+                  itemCount: slides.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      color: slides[index]['color'],
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              slides[index]['icon'],
+                              size: 80,
+                              color: Colors.black,
+                            ),
+                            const SizedBox(height: 20),
+                            Text(
+                              slides[index]['quote'],
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ),
-                  Row(
-                    children: List.generate(4, (index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                        child: DotIndicator(isActive: index == _currentPage),
-                      );
-                    }),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      if (_pageController.page == 3) {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const DashboardScreen()), // Navigate to Dashboard
-                        );
-                      } else {
-                        _pageController.nextPage(
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.ease,
-                        );
-                      }
-                    },
-                    child: const Text(
-                      'Next',
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                        color: Colors.white,
+                    );
+                  },
+                ),
+                Positioned(
+                  bottom: 40,
+                  left: 20,
+                  right: 20,
+                  child: Column(
+                    children: [
+                      DotIndicator(
+                        itemCount: slides.length,
+                        currentIndex: currentIndex,
                       ),
-                    ),
+                      const SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          if (currentIndex > 0)
+                            ElevatedButton(
+                              onPressed: () {
+                                bloc.add(PreviousSlideEvent());
+                              },
+                              child: const Text('Back'),
+                            )
+                          else
+                            const SizedBox(width: 80),
+                          ElevatedButton(
+                            onPressed: () {
+                              if (currentIndex < slides.length - 1) {
+                                bloc.add(NextSlideEvent(slides.length));
+                              } else {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const DashboardScreen(),
+                                  ),
+                                );
+                              }
+                            },
+                            child: Text(
+                              currentIndex == slides.length - 1
+                                  ? 'Finish'
+                                  : 'Next',
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class OnboardingSlide extends StatelessWidget {
-  final String title;
-  final String description;
-
-  const OnboardingSlide({
-    super.key,
-    required this.title,
-    required this.description,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        const SizedBox(
-            height: 100), // To add space for the title and description
-        Text(
-          title,
-          style: const TextStyle(
-            fontFamily: 'Roboto',
-            fontWeight: FontWeight.bold,
-            fontSize: 24,
-            color: Colors.white,
-          ),
-        ),
-        const SizedBox(height: 20),
-        Text(
-          description,
-          style: const TextStyle(
-            fontFamily: 'Roboto',
-            fontWeight: FontWeight.w400,
-            fontSize: 16,
-            color: Colors.white70,
-          ),
-          textAlign: TextAlign.center,
-        ),
-      ],
-    );
-  }
-}
-
-class DotIndicator extends StatelessWidget {
-  final bool isActive;
-
-  const DotIndicator({super.key, required this.isActive});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: isActive ? 16.0 : 10.0,
-      height: 10.0,
-      decoration: BoxDecoration(
-        color: isActive ? Colors.white : Colors.white.withOpacity(0.5),
-        borderRadius: BorderRadius.circular(8),
+          );
+        },
       ),
     );
   }
