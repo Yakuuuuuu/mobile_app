@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mobile_app/bloc/onboarding_state.dart';
 
 import '../bloc/onboarding_bloc.dart';
 import '../bloc/onboarding_event.dart';
+import '../bloc/onboarding_state.dart';
 import 'dashboard_screen.dart';
 import 'widgets/dot_indicator.dart';
 
@@ -82,6 +82,29 @@ class OnboardingScreen extends StatelessWidget {
                     );
                   },
                 ),
+                // Skip Button
+                Positioned(
+                  top: 40,
+                  right: 20,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const DashboardScreen(),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      'Skip',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
                 Positioned(
                   bottom: 40,
                   left: 20,
@@ -104,7 +127,8 @@ class OnboardingScreen extends StatelessWidget {
                               child: const Text('Back'),
                             )
                           else
-                            const SizedBox(width: 80),
+                            const SizedBox(
+                                width: 80), // Placeholder for alignment
                           ElevatedButton(
                             onPressed: () {
                               if (currentIndex < slides.length - 1) {

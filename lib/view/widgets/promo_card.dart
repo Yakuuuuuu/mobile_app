@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../login_screen.dart'; // Import LoginScreen for navigation
+
 class PromoCard extends StatelessWidget {
   const PromoCard({super.key});
 
@@ -28,15 +30,21 @@ class PromoCard extends StatelessWidget {
                   ),
                   SizedBox(height: 4),
                   Text(
-                    'Save 10% or more at participating properties with a free Booking.com membership.',
-                    style: TextStyle(fontSize: 14, color: Colors.grey),
+                    'Welcome to hamroBooking.',
+                    style: TextStyle(color: Colors.grey),
                   ),
                 ],
               ),
             ),
             ElevatedButton(
               onPressed: () {
-                // Handle Sign-in
+                // Navigate to Login Screen
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LoginScreen(),
+                  ),
+                );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,
@@ -44,8 +52,10 @@ class PromoCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
-              child:
-                  const Text('Sign in', style: TextStyle(color: Colors.white)),
+              child: const Text(
+                'Sign In',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ],
         ),

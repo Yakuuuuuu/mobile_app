@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_app/view/signup_screen.dart';
 
 import 'widgets/custom_text_field.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class SignupScreen extends StatelessWidget {
+  const SignupScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final fullNameController = TextEditingController();
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
 
@@ -21,7 +21,7 @@ class LoginScreen extends StatelessWidget {
             children: [
               const SizedBox(height: 60),
               const Text(
-                'Welcome Back!',
+                'Create an Account',
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
@@ -30,10 +30,18 @@ class LoginScreen extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               const Text(
-                'Log in to continue to HamroBooking.',
+                'Sign up to get started with HamroBooking.',
                 style: TextStyle(color: Colors.grey, fontSize: 14),
               ),
               const SizedBox(height: 40),
+
+              // Full Name Input
+              CustomTextField(
+                controller: fullNameController,
+                hintText: 'Full Name',
+                icon: Icons.person,
+              ),
+              const SizedBox(height: 16),
 
               // Email Input
               CustomTextField(
@@ -50,28 +58,13 @@ class LoginScreen extends StatelessWidget {
                 icon: Icons.lock,
                 obscureText: true,
               ),
-              const SizedBox(height: 10),
-
-              // Forgot Password Button
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  onPressed: () {
-                    // Handle forgot password
-                  },
-                  child: const Text(
-                    'Forgot Password?',
-                    style: TextStyle(color: Colors.blue),
-                  ),
-                ),
-              ),
               const SizedBox(height: 20),
 
-              // Login Button
+              // Sign Up Button
               ElevatedButton(
                 onPressed: () {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Login clicked!')),
+                    const SnackBar(content: Text('Sign Up clicked!')),
                   );
                 },
                 style: ElevatedButton.styleFrom(
@@ -83,54 +76,45 @@ class LoginScreen extends StatelessWidget {
                 ),
                 child: const Center(
                   child: Text(
-                    'Log In',
+                    'Sign Up',
                     style: TextStyle(fontSize: 16, color: Colors.white),
                   ),
                 ),
               ),
               const SizedBox(height: 20),
 
-              // Divider
-              Row(
-                children: const [
-                  Expanded(child: Divider(color: Colors.grey)),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text(
-                      'OR',
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                  ),
-                  Expanded(child: Divider(color: Colors.grey)),
-                ],
-              ),
-              const SizedBox(height: 20),
-
-              // Sign Up Option
+              // Already have an account?
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    "Don't have an account?",
+                    'Already have an account?',
                     style: TextStyle(color: Colors.grey),
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SignupScreen(),
-                        ),
-                      );
+                      Navigator.pop(context); // Navigate back to Login
                     },
                     child: const Text(
-                      'Sign Up',
+                      'Log In',
                       style: TextStyle(color: Colors.blue),
                     ),
                   ),
                 ],
               ),
               const SizedBox(height: 40),
+
+              // Info Section
+              const Center(
+                child: Text(
+                  'By signing up, you agree to our Terms of Service and Privacy Policy.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
             ],
           ),
         ),

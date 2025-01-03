@@ -16,11 +16,9 @@ class SearchBox extends StatelessWidget {
         children: [
           const SearchField(icon: Icons.search, label: 'Enter destination'),
           const SizedBox(height: 8),
-          DateField(
-              icon: Icons.calendar_today,
-              label: 'Select dates'), // Updated field for date picker
+          DateField(icon: Icons.calendar_today, label: 'Select dates'),
           const SizedBox(height: 8),
-          const SearchField(
+          const PersonField(
               icon: Icons.people, label: '1 room · 2 adults · No children'),
           const SizedBox(height: 16),
           ElevatedButton(
@@ -84,24 +82,6 @@ class _DateFieldState extends State<DateField> {
           context: context,
           firstDate: DateTime.now(),
           lastDate: DateTime(2100),
-          builder: (context, child) {
-            return Theme(
-              data: Theme.of(context).copyWith(
-                colorScheme: const ColorScheme.dark(
-                  primary: Colors.blue, // Header background color
-                  onPrimary: Colors.black, // Header text color
-                  surface: Colors.grey, // Calendar background
-                  onSurface: Colors.black, // Calendar text color
-                ),
-                textButtonTheme: TextButtonThemeData(
-                  style: TextButton.styleFrom(
-                    foregroundColor: Colors.blue, // Button text color
-                  ),
-                ),
-              ),
-              child: child!,
-            );
-          },
         );
         if (picked != null) {
           setState(() {
@@ -131,6 +111,127 @@ class _DateFieldState extends State<DateField> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class PersonField extends StatefulWidget {
+  final IconData icon;
+  final String label;
+
+  const PersonField({required this.icon, required this.label, super.key});
+
+  @override
+  _PersonFieldState createState() => _PersonFieldState();
+}
+
+class _PersonFieldState extends State<PersonField> {
+  int rooms = 1;
+  int adults = 2;
+  int children = 0;
+
+  String _getLabel() {
+    return '$rooms room · $adults adults · $children children';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return StatefulBuilder(
+              builder: (context, setStateDialog) {
+                return AlertDialog(
+                  backgroundColor: Colors.grey[900],
+                  title: const Text(
+                    'Select Details',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      _buildCounterRow('Rooms', rooms, (value) {
+                        setStateDialog(() => rooms = value);
+                      }),
+                      _buildCounterRow('Adults', adults, (value) {
+                        setStateDialog(() => adults = value);
+                      }),
+                      _buildCounterRow('Children', children, (value) {
+                        setStateDialog(() => children = value);
+                      }),
+                    ],
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text(
+                        'Cancel',
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(
+                            () {}); // Update widget state after confirmation
+                        Navigator.pop(context);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                      ),
+                      child: const Text('Confirm'),
+                    ),
+                  ],
+                );
+              },
+            );
+          },
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey, width: 1),
+          borderRadius: BorderRadius.circular(8),
+          color: Colors.grey[800],
+        ),
+        child: Row(
+          children: [
+            Icon(widget.icon, color: Colors.grey),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                _getLabel(),
+                style: const TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCounterRow(
+      String label, int value, ValueChanged<int> onChanged) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(label, style: const TextStyle(color: Colors.white)),
+        Row(
+          children: [
+            IconButton(
+              onPressed: value > 0 ? () => onChanged(value - 1) : null,
+              icon: const Icon(Icons.remove, color: Colors.grey),
+            ),
+            Text('$value', style: const TextStyle(color: Colors.white)),
+            IconButton(
+              onPressed: () => onChanged(value + 1),
+              icon: const Icon(Icons.add, color: Colors.grey),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
